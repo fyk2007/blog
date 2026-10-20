@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="一个人记一些东西的地方">
+  <title>fyk's blog</title>
+  <link rel="stylesheet" href="{{ROOT}}assets/grid.css">
+</head>
+<body data-root="{{ROOT}}" id="top">
+  <div class="shell">
+    <header class="site-head">
+      <a class="identity" href="{{ROOT}}index.html" aria-label="fyk 的博客首页"><span class="brand-mark" aria-hidden="true">fy.</span><span class="brand-title">fyk's blog</span></a>
+      <nav class="site-nav" aria-label="主导航"><a href="#writing">文章索引</a><a href="https://github.com/fyk2007/blog" target="_blank" rel="noopener">GitHub ↗</a></nav>
+    </header>
+    <main>
+      <p class="site-description">一个人记一些东西的地方</p>
+      <section id="writing" aria-labelledby="writing-title">
+        <div class="section-top"><div class="section-title"><h1 id="writing-title">文章索引</h1><span class="count" data-result-count>{{COUNT}}</span></div><label class="search-wrap"><svg aria-hidden="true" width="13" height="13" viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor"/><path d="m10 10 4 4" stroke="currentColor"/></svg><input id="search" type="search" placeholder="搜索文章" aria-label="搜索文章"></label></div>
+        <div class="writing-body"><aside class="writing-aside"><div class="aside-label">分类</div><div id="filters" aria-label="按文章分类筛选">{{FILTERS}}</div></aside><div id="posts" aria-live="polite">{{POSTS}}</div></div>
+      </section>
+    </main>
+    <footer class="site-footer"><span>© 2026 fyk</span><a class="back-top" href="#top">回到顶部 ↑</a></footer>
+  </div>
+  <script src="{{ROOT}}assets/data.js"></script>
+  <script src="{{ROOT}}assets/blog-index.js"></script>
+</body>
+</html>

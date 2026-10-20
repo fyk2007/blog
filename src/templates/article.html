@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{{TITLE}} · fyk's blog</title>
+  <link rel="stylesheet" href="{{ASSETS}}grid.css">
+  <link rel="stylesheet" href="{{ASSETS}}article.css">
+</head>
+<body class="article-page" id="top">
+  <div class="shell article-shell">
+    <header class="site-head">
+      <a class="identity" href="{{HOME}}" aria-label="fyk 的博客首页"><span class="brand-mark" aria-hidden="true">fy.</span><span class="brand-title">fyk's blog</span></a>
+      <nav class="site-nav" aria-label="主导航"><a href="{{HOME}}#writing">文章索引</a><a href="https://github.com/fyk2007/blog" target="_blank" rel="noopener">GitHub ↗</a></nav>
+    </header>
+    <main class="article-layout">
+      <article id="article">
+        <header class="article-header">
+          <span class="article-category">{{CATEGORY}}</span>
+          <h1 class="article-title" id="{{TITLE_ID}}">{{TITLE}}</h1>
+          <p class="article-meta"><time datetime="{{DATE}}">{{DATE_LABEL}}</time><span class="article-number" aria-label="文章序号">{{NUMBER}}</span></p>
+        </header>
+        <div class="article-body">{{BODY}}</div>
+        <nav class="article-pagination" aria-label="文章翻页">{{NAVIGATION}}</nav>
+      </article>
+      <aside class="article-sidebar">
+        <details class="article-toc" open><summary>目录</summary><nav id="article-toc" aria-label="文章目录">{{TOC}}</nav></details>
+        <nav class="sidebar-pagination" aria-label="文章翻页">{{NAVIGATION}}</nav>
+      </aside>
+    </main>
+    <footer class="site-footer"><span>© 2026 fyk</span><a class="back-top" href="#top">回到顶部 ↑</a></footer>
+  </div>
+  <script src="{{ASSETS}}article.js" defer></script>
+</body>
+</html>
