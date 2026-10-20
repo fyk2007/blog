@@ -5,6 +5,7 @@ import { marked } from 'marked';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const output = path.join(root, 'dist');
+const pagesOutput = path.join(root, 'docs');
 const source = path.join(root, 'content/posts');
 const escape = value => String(value).replace(/[&<>"']/g, character => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[character]));
 const pad = value => String(value).padStart(2, '0');
@@ -86,4 +87,6 @@ posts.forEach((post,index) => {
   write(post.localPath, fill(articleTemplate, {TITLE:escape(post.title),TITLE_ID:escape(slug(post.title)),CATEGORY:escape(post.category),DATE:post.date,DATE_LABEL:escape(post.dateLabel||post.date.replaceAll('-','.')),NUMBER:pad(post.number),HOME:escape(relativeUrl(post.localPath,'index.html')),ASSETS:escape(relativeUrl(post.localPath,'assets')+'/'),BODY:post.body,NAVIGATION:navigation,TOC:toc}));
 });
 write('.nojekyll', '');
-console.log(`已构建 ${posts.length} 篇文章，输出 dist/。`);
+fs.rmSync(pagesOutput, {recursive:true, force:true});
+fs.cpSync(output, pagesOutput, {recursive:true});
+console.log(`已构建 ${posts.length} 篇文章，输出 dist/ 和 docs/。`);

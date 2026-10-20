@@ -14,7 +14,19 @@ npm run build
 npm run preview
 ```
 
-构建结果位于 `dist/`，本地预览地址见终端输出。GitHub Pages 部署使用 `dist/` 的静态文件。
+构建结果位于 `dist/`，本地预览地址见终端输出。同时生成相同内容的 `docs/`，供 GitHub Pages 发布。
+
+## 网页发布
+
+将源码和生成的 `docs/` 一起提交到 GitHub。在仓库 **Settings → Pages** 中设置：
+
+- Source：**Deploy from a branch**
+- Branch：**main**
+- Folder：**/docs**
+
+点击 **Save**，等待部署成功后访问 <https://fyk2007.github.io/blog/>。
+
+修改文章或样式后，运行 `npm run build` 和 `npm run check`，再将源码与 `docs/` 一起提交、推送。`docs/` 是构建产物，请修改 `content/` 或 `src/` 中的源文件后重新构建。
 
 ## 文章
 
