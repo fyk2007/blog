@@ -54,6 +54,8 @@ posts.forEach((post, index) => {
   post.number = index+1;
 });
 const newestFirst = [...posts].reverse();
+const interaction = fs.readFileSync(path.join(root, 'src/templates/interaction.html'), 'utf8');
+const themeControl = fs.readFileSync(path.join(root, 'src/templates/theme-control.html'), 'utf8');
 fs.rmSync(output, {recursive:true, force:true});
 fs.mkdirSync(output, {recursive:true});
 fs.cpSync(path.join(root, 'src/assets'), path.join(output, 'assets'), {recursive:true});
@@ -77,14 +79,14 @@ for (const file of ['index.html', 'directory/index.html']) {
   const prefix = file.includes('/') ? '../' : '';
   const filters = ['全部',...new Set(newestFirst.map(post => post.category))].map(category => `<button class="filter${category==='全部'?' active':''}" type="button" data-filter="${escape(category)}" aria-pressed="${category==='全部'}"><span>${escape(category==='不知道'?'其他':category)}</span><span class="filter-count">${pad(category==='全部'?posts.length:posts.filter(post => post.category===category).length)}</span></button>`).join('');
   const rows = newestFirst.map(post => `<a class="post-row" href="${escape(prefix+post.href)}"><span class="post-number">${pad(post.number)}</span><div class="post-copy"><span class="post-category">${escape(post.category)}</span><h2>${escape(post.title)}</h2></div><div class="post-tail"><time datetime="${post.date}">${escape(post.dateLabel || post.date.replaceAll('-','.'))}</time><span class="post-arrow" aria-hidden="true">↗</span></div></a>`).join('\n');
-  write(file, fill(indexTemplate, {ROOT:prefix,COUNT:pad(posts.length),FILTERS:filters,POSTS:rows}));
+  write(file, fill(indexTemplate, {ROOT:prefix,COUNT:pad(posts.length),FILTERS:filters,POSTS:rows,INTERACTION:interaction,THEME_CONTROL:themeControl}));
 }
 const articleTemplate = fs.readFileSync(path.join(root, 'src/templates/article.html'), 'utf8');
 posts.forEach((post,index) => {
   const item = (target,label,rel) => target ? `<a href="${escape(relativeUrl(post.localPath,target.localPath))}" rel="${rel}"><span class="nav-label">${label}</span><span class="nav-title">${escape(target.title)}</span></a>` : `<span class="nav-disabled" aria-disabled="true">没有${rel==='prev'?'上一篇':'下一篇'}</span>`;
   const navigation = item(posts[index-1],'← 上一篇','prev')+item(posts[index+1],'下一篇 →','next');
   const toc = post.toc.map(heading => `<a class="toc-link" data-level="${heading.level}" href="#${escape(heading.id)}">${escape(heading.title)}</a>`).join('\n') || '<p class="toc-empty">暂无目录</p>';
-  write(post.localPath, fill(articleTemplate, {TITLE:escape(post.title),TITLE_ID:escape(slug(post.title)),CATEGORY:escape(post.category),DATE:post.date,DATE_LABEL:escape(post.dateLabel||post.date.replaceAll('-','.')),NUMBER:pad(post.number),HOME:escape(relativeUrl(post.localPath,'index.html')),ASSETS:escape(relativeUrl(post.localPath,'assets')+'/'),BODY:post.body,NAVIGATION:navigation,TOC:toc}));
+  write(post.localPath, fill(articleTemplate, {TITLE:escape(post.title),TITLE_ID:escape(slug(post.title)),CATEGORY:escape(post.category),DATE:post.date,DATE_LABEL:escape(post.dateLabel||post.date.replaceAll('-','.')),NUMBER:pad(post.number),HOME:escape(relativeUrl(post.localPath,'index.html')),ASSETS:escape(relativeUrl(post.localPath,'assets')+'/'),BODY:post.body,NAVIGATION:navigation,TOC:toc,INTERACTION:interaction,THEME_CONTROL:themeControl}));
 });
 write('.nojekyll', '');
 fs.rmSync(pagesOutput, {recursive:true, force:true});

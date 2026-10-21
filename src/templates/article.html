@@ -6,12 +6,16 @@
   <title>{{TITLE}} · fyk's blog</title>
   <link rel="stylesheet" href="{{ASSETS}}grid.css">
   <link rel="stylesheet" href="{{ASSETS}}article.css">
+  <link rel="stylesheet" href="{{ASSETS}}themes.css">
+  <link rel="stylesheet" href="{{ASSETS}}interaction.css">
+  <script src="{{ASSETS}}themes.js"></script>
 </head>
 <body class="article-page" id="top">
   <div class="shell article-shell">
     <header class="site-head">
       <a class="identity" href="{{HOME}}" aria-label="fyk 的博客首页"><span class="brand-mark" aria-hidden="true">fy.</span><span class="brand-title">fyk's blog</span></a>
-      <nav class="site-nav" aria-label="主导航"><a href="{{HOME}}#writing">文章索引</a><a href="https://github.com/fyk2007/blog" target="_blank" rel="noopener">GitHub ↗</a></nav>
+      {{INTERACTION}}
+      <nav class="site-nav" aria-label="主导航"><a href="{{HOME}}#writing" aria-label="文章索引">文章</a><a href="https://github.com/fyk2007/blog" target="_blank" rel="noopener" aria-label="GitHub">GitHub ↗</a>{{THEME_CONTROL}}</nav>
     </header>
     <main class="article-layout">
       <article id="article">
@@ -31,5 +35,6 @@
     <footer class="site-footer"><span>© 2026 fyk</span><a class="back-top" href="#top">回到顶部 ↑</a></footer>
   </div>
   <script src="{{ASSETS}}article.js" defer></script>
+  <script src="{{ASSETS}}interaction.js" defer></script>
 </body>
 </html>
